@@ -10,14 +10,63 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 </head>
 
+<div class="overlay-info" id="overlayInfo">
+    <div class="modale-info">
+        <button class="modale-info__fermer" onclick="fermerInfo()">✕</button>
+        <div class="modale-info__contenu">
+            <strong>Nom du jeu</strong>
+            <p>Un mot s’affiche à l’écran : avec ton clavier et ta souris, à toi de dessiner ce que ce concept 
+                représente pour toi. 
+                <br><br> Comment symboliser cette idée avec un système graphique contraint tel que l'alphabet latin ?
+Ce projet interroge la valeur universelle des mots, et les divergences de représentation symbolique. 
+<br>Rassure-toi, on se rapproche plus de l’expérience sociale que du concours de dessin. L’objectif, c’est de comprendre comment ton cerveau symbolise 
+et représente une idée associée à un mot. Le plus important, c’est de bien <strong style="color: #ff5500;">sauvegarder</strong> quand tu as terminé !</p>
+            <br><strong>Comment jouer</strong>
+            <p>Appuie sur une touche du clavier pour faire apparaître un glyphe : lettre minuscule, majuscule, ponctuation, etc.</p>
+            <p><strong>Déplacer</strong> : clic gauche + glisser</p>
+            <p><strong>Tourner</strong> : clic droit + glisser</p>
+            <p><strong>Agrandir ou rétrécir</strong> : molette de la souris</p>
+            <p><strong>Retourner</strong> : clic gauche simple</p>
+            <p><strong>Supprimer une lettre </strong> : glisser sur <img src="img/poubelle-fermee.svg" style="height: 1em; width: auto; vertical-align: middle; border-radius: 0;"></p>
+            <p><strong>Sauvegarder</strong> : clic sur <img src="img/save.svg" style="height: 1em; width: auto; vertical-align: middle; border-radius: 0;"></p>            
+            <p><strong>Réinitialiser</strong> : clic sur <img src="img/reset.svg" style="height: 1em; width: auto; vertical-align: middle;"></p>
+            
+            <br><strong>Comment je vais utiliser ta production</strong>
+            <p>En sauvegardant tes dessins, tu les envoies sur un drive 
+                que j'ai créé pour ce projet. 
+                <br>L'enjeu final est de tenter de trouver aux mots une valeur graphique universelle. 
+                Le résultat permettra de mettre le doigt sur des divergences ou des conventions de représentation.</p>
+        </div>
+    </div>
+</div>
+
 <body>
 <div class="header">
     <div class="devinette"></div>
-    <div class="nouveau-mot" onclick="chargerMot()">R</div>
+    <!-- <div class="nouveau-mot" onclick="chargerMot()">R</div> -->
+       <img src="img/again.svg" onclick="chargerMot()" class="nouveau-mot">
 </div>
+<div class="zone"></div>
+
+<div class="info" onclick="ouvrirInfo()"><img src="img/info.svg"></div>
+
 <div class="boutons">
-   <div class="reset" onclick="resetLettres()">Reset</div>
-    <div class="save" id="btnSave" onclick="sauvegarder()">Sauvegarder</div>
+   <div class="reset" onclick="resetLettres()">
+        <img src="img/reset.svg" class="reset-normal">
+    </div>
+    <!-- <div class="reset" onclick="resetLettres()">R</div> -->
+   </div>
+    <div class="poubelle" id="poubelle">
+        <img src="img/poubelle-fermee.svg" class="pb-normal">
+        <img src="img/poubelle-ouverte.svg" class="pb-hover">
+    </div>
+    <!-- <div class="poubelle" id="poubelle">🗑</div> -->
+   <div class="bulle" id="bulle">Glisse une lettre sur la poubelle pour l'effacer de l'écran</div>
+    <div class="save" id="poubelle">
+        <img src="img/save.svg" class="save-normal">
+        <img src="img/save2.svg" class="save-hover">
+    </div>
+    <!-- <div class="save" id="btnSave" onclick="sauvegarder()">Sauvegarder</div> -->
 </div>
 
 <script>
@@ -126,18 +175,28 @@ const SCALE_SENSITIVITY = 0.005;
 ================================ */
 document.addEventListener("keydown", e => {
     if (e.key.length !== 1) return;
-
+    const zone = document.querySelector(".zone");
     const div = document.createElement("div");
     div.className = "lettre";
     div.textContent = e.key;
-
     div.dataset.rotation = 0;
     div.dataset.scale = 1;
     div.dataset.flip = 1;
-    div.dataset.tx = 0;
-    div.dataset.ty = 0;
 
-    document.body.appendChild(div);
+    document.body.appendChild(div); // ← on remet dans body
+
+    const zoneRect = zone.getBoundingClientRect();
+    const rect = div.getBoundingClientRect();
+
+    // Centre horizontal de la zone, bas de la zone
+    const tx = 40;
+    const ty = 460;
+    // const tx = zoneRect.left + (zoneRect.width / 2) - (rect.width / 2);
+    // const ty = zoneRect.top + zoneRect.height - rect.height;
+
+    div.dataset.tx = tx;
+    div.dataset.ty = ty;
+    applyTransform(div);
     attachEvents(div);
 });
 
@@ -160,9 +219,18 @@ function attachEvents(el) {
         offsetX = parseFloat(el.dataset.tx);
         offsetY = parseFloat(el.dataset.ty);
 
-        if (e.button === 2) mode = "transform";
+        if (e.button === 2) mode = "rotate";  // ← clic droit = rotation seulement
         else mode = "move";
     });
+
+    // Molette = scale
+    el.addEventListener("wheel", e => {
+        e.preventDefault();
+        const currentScale = parseFloat(el.dataset.scale);
+        const delta = e.deltaY > 0 ? -0.1 : 0.1;  // bas = rétrécir, haut = agrandir
+        el.dataset.scale = Math.max(0.1, currentScale + delta);
+        applyTransform(el);
+    }, { passive: false });
 }
 
 document.addEventListener("contextmenu", e => e.preventDefault());
@@ -184,14 +252,14 @@ document.addEventListener("mousemove", e => {
         applyTransform(active);
     }
 
-    if (mode === "transform") {
+    if (mode === "rotate") {  // ← clic droit = rotation seulement
         const newRotation = startRotation + dx * ROTATION_SENSITIVITY;
-        const newScale = Math.max(0.1, startScale - dy * SCALE_SENSITIVITY);
         active.dataset.rotation = newRotation;
-        active.dataset.scale = newScale;
         applyTransform(active);
     }
 });
+
+
 
 /* ==============================
    FIN DU CLIC
@@ -199,7 +267,15 @@ document.addEventListener("mousemove", e => {
 document.addEventListener("mouseup", e => {
     if (!active) return;
 
-    if (!hasMoved && e.button === 0) {
+    const rect = poubelle.getBoundingClientRect();
+    const surPoubelle = (
+        e.clientX >= rect.left && e.clientX <= rect.right &&
+        e.clientY >= rect.top  && e.clientY <= rect.bottom
+    );
+
+    if (surPoubelle) {
+        active.remove();
+    } else if (!hasMoved && e.button === 0) {
         active.dataset.flip *= -1;
         applyTransform(active);
     }
@@ -207,6 +283,8 @@ document.addEventListener("mouseup", e => {
     isDragging = false;
     active = null;
 });
+
+
 
 /* ==============================
    APPLICATION DES TRANSFORMATIONS
@@ -225,6 +303,41 @@ function applyTransform(el) {
    INIT
 ================================ */
 chargerMot();
+
+
+/* ==============================
+   BULLE POUBELLE
+================================ */
+const bulle = document.getElementById("bulle");
+let bulleTimeout = null;
+
+poubelle.addEventListener("mouseenter", () => {
+    if (isDragging) return; // on tient une lettre, pas de bulle
+    bulle.classList.add("bulle--visible");
+    bulleTimeout = setTimeout(() => {
+        bulle.classList.remove("bulle--visible");
+    }, 2400);
+});
+
+poubelle.addEventListener("mouseleave", () => {
+    clearTimeout(bulleTimeout);
+    bulle.classList.remove("bulle--visible");
+});
+
+
+
+function ouvrirInfo() {
+    document.getElementById("overlayInfo").classList.add("actif");
+}
+function fermerInfo() {
+    document.getElementById("overlayInfo").classList.remove("actif");
+}
+// Fermer en cliquant sur l'overlay (hors modale)
+document.getElementById("overlayInfo").addEventListener("click", function(e) {
+    if (e.target === this) fermerInfo();
+});
+
+
 </script>
 
 </body>
