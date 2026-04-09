@@ -10,66 +10,66 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 </head>
 
+
+
 <body>
     <div class="overlay-info" id="overlayInfo">
-        <div class="modale-info">
-            <button class="modale-info__fermer" onclick="fermerInfo()">✕</button>
-            <div class="modale-info__contenu">
-                <strong>TYPIC</strong>
-                <p>Un mot s'affiche à l'écran : avec ton clavier et ta souris, à toi de dessiner ce que ce concept
-                    représente pour toi.
-                    <br><br> Comment symboliser cette idée avec un système graphique contraint tel que l'alphabet latin ?
-Ce projet interroge la valeur universelle des mots, des signes, et les divergences de représentation symbolique.
-<br>Rassure-toi, on se rapproche plus de l'expérience sociale que du concours de dessin. L'objectif, c'est de comprendre comment ton cerveau symbolise
-et représente une idée associée à un mot. Le plus important, c'est de bien <strong style="color: #c5c211;">sauvegarder</strong> quand tu as terminé !</p>
-                <br><strong>Comment jouer</strong>
-                <p>Appuie sur une touche du clavier pour faire apparaître un glyphe : lettre minuscule, majuscule, ponctuation, etc.</p>
-                <p><em>Sur mobile, appuie sur la zone de dessin pour ouvrir le clavier.</em></p>
-                <p><strong>Déplacer</strong> : clic gauche + glisser / 1 doigt</p>
-                <p><strong>Pivoter</strong> : clic droit + glisser / 2 doigts tourner</p>
-                <p><strong>Agrandir ou rétrécir</strong> : molette de la souris / pincer à 2 doigts</p>
-                <p><strong>Retourner</strong> : clic gauche simple / tap</p>
-                <p><strong>Supprimer une lettre </strong> : glisser sur <img src="img/poubelle-fermee.svg" style="height: 1em; width: auto; vertical-align: middle; border-radius: 0;"></p>
-                <p><strong>Réinitialiser</strong> : clic sur <img src="img/poubelle-fermee.svg" style="height: 1em; width: auto; vertical-align: middle; border-radius: 0;"></p>
-                <p><strong>Sauvegarder</strong> : clic sur <img src="img/save.svg" style="height: 1em; width: auto; vertical-align: middle; border-radius: 0;"></p>
+    <div class="modale-info">
+        <button class="modale-info__fermer" onclick="fermerInfo()">✕</button>
+        <div class="modale-info__contenu">
+            <strong>TYPIC</strong>
+            <p>Un mot s’affiche à l’écran : avec ton clavier et ta souris, à toi de dessiner ce que ce concept 
+                représente pour toi. 
+                <br><br> Comment symboliser cette idée avec un système graphique contraint tel que l'alphabet latin ?
+Ce projet interroge la valeur universelle des mots, des signes, et les divergences de représentation symbolique. 
+<br>Rassure-toi, on se rapproche plus de l’expérience sociale que du concours de dessin. L’objectif, c’est de comprendre comment ton cerveau symbolise 
+et représente une idée associée à un mot. Le plus important, c’est de bien <strong style="color: #c5c211;">sauvegarder</strong> quand tu as terminé !</p>
+            <br><strong>Comment jouer</strong>
+            <p>Appuie sur une touche du clavier pour faire apparaître un glyphe : lettre minuscule, majuscule, ponctuation, etc.</p>
+            <p><strong>Déplacer</strong> : clic gauche + glisser</p>
+            <p><strong>Pivoter</strong> : clic droit + glisser</p>
+            <p><strong>Agrandir ou rétrécir</strong> : molette de la souris</p>
+            <p><strong>Retourner</strong> : clic gauche simple</p>
+            <p><strong>Supprimer une lettre </strong> : glisser sur <img src="img/poubelle-fermee.svg" style="height: 1em; width: auto; vertical-align: middle; border-radius: 0;"></p>
+            <p><strong>Réinitialiser</strong> : clic sur <img src="img/poubelle-fermee.svg" style="height: 1em; width: auto; vertical-align: middle; border-radius: 0;"></p>
+            <p><strong>Sauvegarder</strong> : clic sur <img src="img/save.svg" style="height: 1em; width: auto; vertical-align: middle; border-radius: 0;"></p>            
 
-                <br><strong>Comment je vais utiliser ta production</strong>
-                <p>En sauvegardant tes dessins, tu les envoies sur un drive
-                    que j'ai créé pour ce projet.
-                    <br>L'enjeu final est de tenter de trouver aux mots une valeur graphique universelle.
-                    Le résultat permettra de mettre le doigt sur des divergences ou des conventions de représentation.</p>
-            </div>
+
+            <br><strong>Comment je vais utiliser ta production</strong>
+            <p>En sauvegardant tes dessins, tu les envoies sur un drive 
+                que j'ai créé pour ce projet. 
+                <br>L'enjeu final est de tenter de trouver aux mots une valeur graphique universelle. 
+                Le résultat permettra de mettre le doigt sur des divergences ou des conventions de représentation.</p>
         </div>
     </div>
+</div>
+<div class="header">
+    <div class="devinette"></div>
+       <img src="img/again.svg" onclick="chargerMot()" class="nouveau-mot">
+</div>
+<div class="zone"></div>
 
-    <div class="header">
-        <div class="devinette"></div>
-        <img src="img/again.svg" onclick="chargerMot()" class="nouveau-mot">
+<div class="info" onclick="ouvrirInfo()"><img src="img/logo.svg"></div>
+
+<div class="boutons">
+   <!-- <div class="reset" onclick="resetLettres()">
+        <img src="img/reset.svg" class="reset-normal">
+    </div> -->
+    <div class="poubelle" id="poubelle" onclick="resetLettres()">
+        <img src="img/poubelle-fermee.svg" class="pb-normal">
+        <img src="img/poubelle-ouverte.svg" class="pb-hover">
     </div>
-
-    <!-- Input caché pour déclencher le clavier mobile -->
-    <input id="inputCachee" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-        style="position:fixed; opacity:0; pointer-events:none; top:0; left:0; width:1px; height:1px;">
-
-    <div class="zone" id="zone"></div>
-
-    <div class="info" onclick="ouvrirInfo()"><img src="img/logo.svg"></div>
-
-    <div class="boutons">
-        <div class="poubelle" id="poubelle" onclick="resetLettres()">
-            <img src="img/poubelle-fermee.svg" class="pb-normal">
-            <img src="img/poubelle-ouverte.svg" class="pb-hover">
-        </div>
-        <div class="save" id="btnSave" onclick="sauvegarder()">
-            <img src="img/save.svg" class="save-normal">
-            <img src="img/save2.svg" class="save-hover">
-        </div>
+    <div class="save" id="btnSave" onclick="sauvegarder()">
+        <img src="img/save.svg" class="save-normal">
+        <img src="img/save2.svg" class="save-hover">
     </div>
+</div>
 
-    <div class="bulle1" id="bulle1">Glisse une lettre sur la poubelle pour l'effacer de l'écran. <br>Clique dessus pour réinitialiser.</div>
-    <div class="bulle2" id="bulle2">Sauvegarde réussie ! <br><span onclick="sauvegardeLocale()" style="text-decoration: underline; cursor: pointer;">
-        Enregistrer ton oeuvre sur ton pc ?
-    </span></div>
+   <div class="bulle1" id="bulle1">Glisse une lettre sur la poubelle pour l'effacer de l'écran. <br>Clique dessus pour réinitialiser.</div>
+   <div class="bulle2" id="bulle2" >Sauvegarde réussie ! <br><span onclick="sauvegardeLocale()" style="text-decoration: underline; cursor: pointer;">
+    Enregistrer ton oeuvre sur ton pc ?
+</span></div>
+
 
 <script>
 /* ==============================
@@ -86,21 +86,24 @@ function resetLettres() {
 }
 
 /* ==============================
-   BOUTON SAUVEGARDER
+   BOUTON SAUVEGARDER (Drive + local)
 ================================ */
 const bulle2 = document.getElementById("bulle2");
 let bulle2Timeout = null;
+
+
 
 async function sauvegarder() {
     const btn = document.getElementById("btnSave");
     btn.style.pointerEvents = "none";
     btn.style.opacity = "0.5";
 
-    try {
+        try {
         const canvas = await html2canvas(document.body);
         const imageBase64Full = canvas.toDataURL("image/png");
         const imageBase64 = imageBase64Full.split(",")[1];
 
+        // Nom du fichier
         const mot = document.querySelector(".devinette").textContent || "image";
         const now = new Date();
         const date = now.toLocaleString("fr-FR")
@@ -108,18 +111,34 @@ async function sauvegarder() {
             .replace(" ", "_");
         const nomFichier = `${mot}_${date}.png`;
 
+        // // ── 1. Téléchargement local ──
+        // const lien = document.createElement("a");
+        // lien.href = imageBase64Full;
+        // lien.download = nomFichier;
+        // lien.click();
+
+        // ── 2. Envoi vers Google Drive ──
         const response = await fetch(DRIVE_URL, {
             method: "POST",
-            body: JSON.stringify({ image: imageBase64, nom: nomFichier })
+            body: JSON.stringify({
+                image: imageBase64,
+                nom: nomFichier
+            })
         });
 
         const result = await response.text();
         console.log("Drive :", result);
 
         bulle2.classList.add("bulle2--visible");
-        bulle2Timeout = setTimeout(() => {
-            bulle2.classList.remove("bulle2--visible");
-        }, 4800);
+    bulle2Timeout = setTimeout(() => {
+        bulle2.classList.remove("bulle2--visible");
+    }, 4800);
+    btn.style.opacity = "1";
+        // btn.textContent = "✅ Sauvegardé";
+        // setTimeout(() => {
+        //     btn.textContent = "Sauvegarder";
+        //     btn.style.pointerEvents = "auto";
+        // }, 2500);
 
     } catch (err) {
         console.error("Erreur sauvegarde :", err);
@@ -129,21 +148,26 @@ async function sauvegarder() {
             btn.style.pointerEvents = "auto";
             btn.style.opacity = "1";
         }, 2500);
-    } finally {
+    }finally {
         btn.style.pointerEvents = "auto";
         btn.style.opacity = "1";
     }
 }
 
+
 function sauvegardeLocale() {
     html2canvas(document.body).then(canvas => {
         const imageBase64Full = canvas.toDataURL("image/png");
+
+        // Nom du fichier
         const mot = document.querySelector(".devinette").textContent || "image";
         const now = new Date();
         const date = now.toLocaleString("fr-FR")
             .replace(/[/:]/g, "-")
             .replace(" ", "_");
         const nomFichier = `${mot}_${date}.png`;
+
+        // Téléchargement
         const lien = document.createElement("a");
         lien.href = imageBase64Full;
         lien.download = nomFichier;
@@ -154,6 +178,7 @@ function sauvegardeLocale() {
 /* ==============================
    GOOGLE SHEETS — MOT ALÉATOIRE
 ================================ */
+
 async function chargerMot() {
     const btn = document.querySelector(".nouveau-mot");
     btn.style.opacity = "0.5";
@@ -181,128 +206,89 @@ let isDragging = false;
 let mode = null;
 let hasMoved = false;
 
-let offsetX = 0, offsetY = 0;
+let offsetX = 0;
+let offsetY = 0;
+
 let startX, startY;
 let startRotation, startScale, startFlip;
 
-// Pinch
-let startPinchDist = null;
-let startPinchScale = null;
-let startPinchAngle = null;
-let startPinchRotation = null;
+const ROTATION_SENSITIVITY = 0.5;
+const SCALE_SENSITIVITY = 0.005;
 
 /* ==============================
-   CRÉATION D'UNE LETTRE
+   CREATION D'UNE LETTRE
 ================================ */
-function creerLettre(char) {
+document.addEventListener("keydown", e => {
+    if (e.key.length !== 1) return;
+    const zone = document.querySelector(".zone");
     const div = document.createElement("div");
     div.className = "lettre";
-    div.textContent = char;
+    div.textContent = e.key;
     div.dataset.rotation = 0;
     div.dataset.scale = 1;
     div.dataset.flip = 1;
 
-    document.body.appendChild(div);
+    document.body.appendChild(div); // ← on remet dans body
 
-    const tx = 40;
-    const ty = window.innerHeight - 185;
+    const zoneRect = zone.getBoundingClientRect();
+    const rect = div.getBoundingClientRect();
+
+    // Centre horizontal de la zone, bas de la zone
+const tx = 40;
+const ty = window.innerHeight - 185;
+    // const tx = zoneRect.left + (zoneRect.width / 2) - (rect.width / 2);
+    // const ty = zoneRect.top + zoneRect.height - rect.height;
 
     div.dataset.tx = tx;
     div.dataset.ty = ty;
     applyTransform(div);
     attachEvents(div);
-}
-
-// Clavier physique (PC)
-document.addEventListener("keydown", e => {
-    if (e.key.length !== 1) return;
-    // Ne pas créer de lettre si on est dans la modale
-    if (document.getElementById("overlayInfo").classList.contains("actif")) return;
-    creerLettre(e.key);
-});
-
-// Clavier virtuel (mobile) via input caché
-const inputCachee = document.getElementById("inputCachee");
-
-document.getElementById("zone").addEventListener("click", () => {
-    inputCachee.focus();
-});
-
-inputCachee.addEventListener("input", e => {
-    const char = e.data;
-    if (char && char.length === 1) creerLettre(char);
-    inputCachee.value = "";
 });
 
 /* ==============================
-   ATTACHE DES ÉVÉNEMENTS (souris + tactile)
+   ATTACHE DES EVENEMENTS
 ================================ */
 function attachEvents(el) {
-
-    // ── SOURIS ──
     el.addEventListener("mousedown", e => {
-        e.preventDefault();
         active = el;
         isDragging = true;
         hasMoved = false;
+
         startX = e.clientX;
         startY = e.clientY;
+
         startRotation = parseFloat(el.dataset.rotation);
         startScale = parseFloat(el.dataset.scale);
         startFlip = parseFloat(el.dataset.flip);
+
         offsetX = parseFloat(el.dataset.tx);
         offsetY = parseFloat(el.dataset.ty);
-        mode = e.button === 2 ? "rotate" : "move";
+
+        if (e.button === 2) mode = "rotate";  // ← clic droit = rotation seulement
+        else mode = "move";
     });
 
+    // Molette = scale
     el.addEventListener("wheel", e => {
         e.preventDefault();
         const currentScale = parseFloat(el.dataset.scale);
-        const delta = e.deltaY > 0 ? -0.1 : 0.1;
+        const delta = e.deltaY > 0 ? -0.1 : 0.1;  // bas = rétrécir, haut = agrandir
         el.dataset.scale = Math.max(0.1, currentScale + delta);
         applyTransform(el);
-    }, { passive: false });
-
-    // ── TACTILE ──
-    el.addEventListener("touchstart", e => {
-        e.preventDefault();
-        active = el;
-        isDragging = true;
-        hasMoved = false;
-        startRotation = parseFloat(el.dataset.rotation);
-        startScale = parseFloat(el.dataset.scale);
-        startFlip = parseFloat(el.dataset.flip);
-        offsetX = parseFloat(el.dataset.tx);
-        offsetY = parseFloat(el.dataset.ty);
-
-        if (e.touches.length === 1) {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-            mode = "move";
-            startPinchDist = null;
-            startPinchAngle = null;
-        } else if (e.touches.length === 2) {
-            mode = "pinch";
-            const dx = e.touches[0].clientX - e.touches[1].clientX;
-            const dy = e.touches[0].clientY - e.touches[1].clientY;
-            startPinchDist = Math.hypot(dx, dy);
-            startPinchScale = parseFloat(el.dataset.scale);
-            startPinchAngle = Math.atan2(dy, dx) * (180 / Math.PI);
-            startPinchRotation = parseFloat(el.dataset.rotation);
-        }
     }, { passive: false });
 }
 
 document.addEventListener("contextmenu", e => e.preventDefault());
 
 /* ==============================
-   MOUVEMENT SOURIS
+   MOUVEMENT DE LA SOURIS
 ================================ */
 document.addEventListener("mousemove", e => {
     if (!isDragging || !active) return;
 
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
+
     if (Math.abs(dx) > 3 || Math.abs(dy) > 3) hasMoved = true;
 
     if (mode === "move") {
@@ -310,47 +296,17 @@ document.addEventListener("mousemove", e => {
         active.dataset.ty = offsetY + dy;
         applyTransform(active);
     }
-    if (mode === "rotate") {
-        active.dataset.rotation = startRotation + (dx + dy) * 0.3;
+
+    if (mode === "rotate") {  // ← clic droit = rotation seulement
+const newRotation = startRotation + (dx + dy) * 0.3;        active.dataset.rotation = newRotation;
         applyTransform(active);
     }
 });
 
-/* ==============================
-   MOUVEMENT TACTILE
-================================ */
-document.addEventListener("touchmove", e => {
-    if (!isDragging || !active) return;
-    e.preventDefault();
 
-    if (e.touches.length === 1 && mode === "move") {
-        const dx = e.touches[0].clientX - startX;
-        const dy = e.touches[0].clientY - startY;
-        if (Math.abs(dx) > 3 || Math.abs(dy) > 3) hasMoved = true;
-        active.dataset.tx = offsetX + dx;
-        active.dataset.ty = offsetY + dy;
-        applyTransform(active);
-    }
-
-    if (e.touches.length === 2 && mode === "pinch" && startPinchDist !== null) {
-        hasMoved = true;
-        const dx = e.touches[0].clientX - e.touches[1].clientX;
-        const dy = e.touches[0].clientY - e.touches[1].clientY;
-
-        // Scale
-        const dist = Math.hypot(dx, dy);
-        active.dataset.scale = Math.max(0.1, startPinchScale * (dist / startPinchDist));
-
-        // Rotation
-        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-        active.dataset.rotation = startPinchRotation + (angle - startPinchAngle);
-
-        applyTransform(active);
-    }
-}, { passive: false });
 
 /* ==============================
-   FIN DU CLIC / TAP
+   FIN DU CLIC
 ================================ */
 document.addEventListener("mouseup", e => {
     if (!active) return;
@@ -372,28 +328,7 @@ document.addEventListener("mouseup", e => {
     active = null;
 });
 
-document.addEventListener("touchend", e => {
-    if (!active) return;
 
-    const touch = e.changedTouches[0];
-    const rect = poubelle.getBoundingClientRect();
-    const surPoubelle = (
-        touch.clientX >= rect.left && touch.clientX <= rect.right &&
-        touch.clientY >= rect.top  && touch.clientY <= rect.bottom
-    );
-
-    if (surPoubelle) {
-        active.remove();
-    } else if (!hasMoved && e.changedTouches.length === 1) {
-        active.dataset.flip *= -1;
-        applyTransform(active);
-    }
-
-    isDragging = false;
-    active = null;
-    startPinchDist = null;
-    startPinchAngle = null;
-});
 
 /* ==============================
    APPLICATION DES TRANSFORMATIONS
@@ -404,6 +339,7 @@ function applyTransform(el) {
     const flip = el.dataset.flip;
     const tx = el.dataset.tx;
     const ty = el.dataset.ty;
+
     el.style.transform = `translate(${tx}px, ${ty}px) rotate(${rotation}deg) scale(${scale * flip}, ${scale})`;
 }
 
@@ -413,6 +349,7 @@ function applyTransform(el) {
 chargerMot();
 ouvrirInfo();
 
+
 /* ==============================
    BULLE POUBELLE
 ================================ */
@@ -420,7 +357,7 @@ const bulle1 = document.getElementById("bulle1");
 let bulle1Timeout = null;
 
 poubelle.addEventListener("mouseenter", () => {
-    if (isDragging) return;
+    if (isDragging) return; // on tient une lettre, pas de bulle
     bulle1.classList.add("bulle1--visible");
     bulle1Timeout = setTimeout(() => {
         bulle1.classList.remove("bulle1--visible");
@@ -432,26 +369,27 @@ poubelle.addEventListener("mouseleave", () => {
     bulle1.classList.remove("bulle1--visible");
 });
 
-/* ==============================
-   OVERLAY INFO
-================================ */
+
+
 function ouvrirInfo() {
     document.getElementById("overlayInfo").classList.add("actif");
 }
-
 function fermerInfo() {
     const modale = document.querySelector(".modale-info");
     modale.classList.add("aspirer");
+
     modale.addEventListener("animationend", () => {
         document.getElementById("overlayInfo").classList.remove("actif");
         modale.classList.remove("aspirer");
     }, { once: true });
 }
-
-document.getElementById("overlayInfo").addEventListener("click", "touchend", function(e) {
+// Fermer en cliquant sur l'overlay (hors modale)
+document.getElementById("overlayInfo").addEventListener("click", function(e) {
     if (e.target === this) fermerInfo();
 });
 
+
 </script>
+
 </body>
 </html>
