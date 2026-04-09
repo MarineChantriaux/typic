@@ -435,22 +435,22 @@ poubelle.addEventListener("mouseleave", () => {
 /* ==============================
    OVERLAY INFO
 ================================ */
-// function ouvrirInfo() {
-//     document.getElementById("overlayInfo").classList.add("actif");
-// }
+function ouvrirInfo() {
+    document.getElementById("overlayInfo").classList.add("actif");
+}
 
-// function fermerInfo() {
-//     const modale = document.querySelector(".modale-info");
-//     modale.classList.add("aspirer");
-//     modale.addEventListener("animationend", () => {
-//         document.getElementById("overlayInfo").classList.remove("actif");
-//         modale.classList.remove("aspirer");
-//     }, { once: true });
-// }
+function fermerInfo() {
+    const modale = document.querySelector(".modale-info");
+    modale.classList.add("aspirer");
+    modale.addEventListener("animationend", () => {
+        document.getElementById("overlayInfo").classList.remove("actif");
+        modale.classList.remove("aspirer");
+    }, { once: true });
+}
 
-// document.getElementById("overlayInfo").addEventListener("click", function(e) {
-//     if (e.target === this) fermerInfo();
-// });
+document.getElementById("overlayInfo").addEventListener("click", "touchend", function(e) {
+    if (e.target === this) fermerInfo();
+});
 
 </script>
 </body>
